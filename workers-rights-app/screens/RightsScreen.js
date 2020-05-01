@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, StyleSheet, FlatList, Platform } from "react-native";
+import { View, StyleSheet, FlatList, Platform, Button } from "react-native";
 import { RIGHTSCATEGORIES } from "../data/dummy-data";
 import Colors from "../constants/Colors";
 import RightsCategoryTile from "../components/RightsCategoryTile";
@@ -42,9 +42,44 @@ const RightsScreen = (props) => {
     );
   };
 
+  // const dummyFunc = () => {
+  //   return async 
+  //   // for any type of request to firebase
+  //   fetch('https://workers-rights.firebaseio.com/testing.json', { 
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     bdoy: JSON.stringify({ // automatically creates ID
+  //       title: 'dummy title',
+  //       description: 'hello'
+  //     })
+  //   }); 
+  //   //console.log("response data: ", resData)
+  // };
+
+  async function dummyFunc() {
+    fetch('https://workers-rights.firebaseio.com/testing.json', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstParam: 'yourValue',
+        secondParam: 'yourOtherValue',
+      }),
+    });
+  }
+
   // <RightsModal />
   return (
     <View style={styles.screen}>
+      <Button
+        onPress={dummyFunc}
+        title="Dummy Button"
+        color={Colors.darkOrange}
+      />
       <FlatList
         data={RIGHTSCATEGORIES}
         renderItem={renderGridItem}

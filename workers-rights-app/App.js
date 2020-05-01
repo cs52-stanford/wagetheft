@@ -5,6 +5,8 @@ import { Host } from "react-native-portalize";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { enableScreens } from "react-native-screens";
+//import { createStore, combineReducers, applyMiddleware } from 'redux';
+//import ReduxThunk from 'redux-thunk';
 
 enableScreens();
 
@@ -17,6 +19,8 @@ const fetchFonts = () => {
     "nunito-extrabold": require("./assets/fonts/Nunito-ExtraBold.ttf"),
   });
 };
+
+// create store with applyMiddleware as a second argument
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
