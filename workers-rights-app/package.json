@@ -10,7 +10,9 @@
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
     "@react-native-community/masked-view": "^0.1.5",
+    "@react-native-firebase/app": "^6.7.1",
     "expo": "~36.0.0",
+    "firebase": "^7.14.2",
     "ionicons": "^5.0.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",

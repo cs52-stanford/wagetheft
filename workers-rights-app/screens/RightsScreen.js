@@ -59,7 +59,7 @@ const RightsScreen = (props) => {
   // };
 
   async function dummyFunc() {
-    fetch('https://workers-rights.firebaseio.com/testing.json', {
+    fetch('https://workers-rights-46c43.firebaseio.com/testing.json', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
