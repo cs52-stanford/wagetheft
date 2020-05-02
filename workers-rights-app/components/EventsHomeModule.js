@@ -7,11 +7,43 @@ import {
   FlatList,
   Dimensions,
 } from "react-native";
+import { useSelector } from 'react-redux';
+
+
 import EventsHomeCard from "../components/EventsHomeCard.js";
-import { EVENTS } from "../data/dummy-data";
 import Colors from '../constants/Colors';
 
 const EventsHomeModule = (props) => {
+
+  const allEvents = useSelector(state => state.events.allEvents);
+  const yourEvents = useSelector(state => state.events.yourEvents);
+
+  const displayedEvents = (props.category === "Your Events") ? yourEvents : allEvents.filter(
+    event => event.category === props.category);
+  
+  
+  const len = displayedEvents.length;
+
+  // Case where there are no events
+  if(len === 0){
+    return(
+    <View style={styles.noEventsContainer}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.categoryText}>{props.category}</Text>
+      </View>
+      <View style={styles.noEventsTextCotainer}>
+        <Text style={styles.noEventsText}>There are no events in this category.</Text>
+        <Text style={styles.noEventsText}>Add some by tapping on the star in each event!</Text>
+      </View>
+    </View>);
+  }
+
+  // Set a limit on how many cards an be rendered
+  const renderNum = 4;
+  while(len > renderNum){
+    displayedEvents.pop();
+  }
+
   const renderHomeCards = (itemData) => {
     return (
       <EventsHomeCard
@@ -35,7 +67,7 @@ const EventsHomeModule = (props) => {
       </View>
       <FlatList
         horizontal={true}
-        data={EVENTS}
+        data={displayedEvents}
         renderItem={renderHomeCards}
         showsHorizontalScrollIndicator={false}
       />
@@ -46,6 +78,12 @@ const EventsHomeModule = (props) => {
 const styles = StyleSheet.create({
   container: {
     height: 192,
+    width: "100%",
+    marginLeft: Dimensions.get("window").width * 0.067,
+    marginBottom: 40,
+  },
+  noEventsContainer: {
+    height: 70,
     width: "100%",
     marginLeft: Dimensions.get("window").width * 0.067,
     marginBottom: 40,
@@ -75,6 +113,18 @@ const styles = StyleSheet.create({
     fontFamily: "nunito-bold",
     color: "#373A42",
   },
+  noEventsText: {
+    fontSize: 16,
+    fontFamily: "nunito-regular",
+    color: Colors.darkGray
+  },
+  noEventsTextCotainer: {
+    backgroundColor: Colors.gray,
+    width: Dimensions.get("window").width * 0.866,
+    padding: 5,
+    paddingLeft: 10,
+    justifyContent:"space-between"
+  }
 });
 
 export default EventsHomeModule;

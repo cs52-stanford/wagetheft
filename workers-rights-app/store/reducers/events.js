@@ -3,7 +3,9 @@ import { SET_YOUR_EVENT } from '../actions/events';
 
 const initialState = {
     allEvents: EVENTS,
-    yourEvents: []
+    yourEvents: [],
+    social: [],
+    workshops: []
 };
 
 

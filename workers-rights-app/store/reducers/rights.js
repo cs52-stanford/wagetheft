@@ -11,3 +11,5 @@ const initialState = {
 const rightsReducer = (state = initialState, action) => {
     return state;
 }
+
+export default rightsReducer;

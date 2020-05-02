@@ -1,10 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { EVENTS } from "../data/dummy-data";
 import EventCategoryCard from '../components/EventCategoryCard';
 
 const EventCategoryScreen = props => {
+
+  const allEvents = useSelector(state => state.events.allEvents);
+  const yourEvents = useSelector(state => state.events.yourEvents);
+  const category = props.navigation.getParam("categoryTitle");
+
+  const displayedEvents = (category === "Your Events") ? yourEvents : allEvents.filter(
+    event => event.category === category);
+  
     const renderCards = (itemData) => {
         return (
           <EventCategoryCard
@@ -18,7 +26,7 @@ const EventCategoryScreen = props => {
                   routeName: "EventDetails",
                   params: {
                     eventId: id,
-                  },
+                  }
                 }) }
             }
             id={itemData.item.id}
@@ -26,13 +34,10 @@ const EventCategoryScreen = props => {
         );
       };
     
-    {/* validEvents isn't going to be used yet */}
-    const validEvents = EVENTS.filter(
-        e => e.category === props.category);
     return (
        <View style={styles.container}>
          <FlatList
-           data={EVENTS}
+           data={displayedEvents}
            renderItem={renderCards}
            showsVerticalScrollIndicator={false}
          />

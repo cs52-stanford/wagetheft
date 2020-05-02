@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { EVENTS } from "../data/dummy-data";
 
 const EventDetails = (props) => {
-  const event = EVENTS.filter((event) => event.id === props.id)[0];
+  const event = props.event;
   return (
     <View style={{ width: "100%", height: "100%" }}>
       <View style={styles.headingImageContainer}>
