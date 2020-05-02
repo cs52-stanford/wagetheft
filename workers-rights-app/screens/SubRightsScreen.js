@@ -8,10 +8,9 @@ const SubRightsScreen = (props) => {
   // Get the rights category that we passed in with navigation (eg. "Getting Paid")
   const catId = props.navigation.getParam("categoryId");
   const selectedCategory = RIGHTSCATEGORIES.find((cat) => cat.id == catId);
-  const displayedSubRights = SUBRIGHTS;
-  // const displayedSubRights = SUBRIGHTS.filter(
-  //   (subright) => subright.categoryIds.indexOf(catId) >= 0
-  // );
+  const displayedSubRights = SUBRIGHTS.filter(
+    (subright) => subright.categoryIds.indexOf(catId) >= 0
+  );
 
   const renderSubright = (itemData) => {
     return (
@@ -31,47 +30,8 @@ const SubRightsScreen = (props) => {
     );
   };
 
-   async function dummyFunc(itemData) {
-    const response = await fetch('https://workers-rights-46c43.firebaseio.com/subrights.json', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        // categoryIds, title, img, emoji, learnMores, description, organizations
-        body: JSON.stringify({ // automatically creates ID
-          categoryIds: itemData.item.categoryIds,
-          title: itemData.item.title,
-          img: itemData.item.img,
-          emoji: itemData.item.emoji,
-          learnMores: itemData.item.learnMores,
-          description: itemData.item.description,
-          organizations: itemData.item.organizations,
-        })
-    });
-
-    const resData = await response.json();
-    console.log(resData);
-
-  } 
-
-  // async function dummyFunc() {
-
-  //   fetch('https://workers-rights-46c43.firebaseio.com/testing.json', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       firstParam: 'HELLO',
-  //       secondParam: 'BYE',
-  //     }),
-  //   });
-  // }
-
   return (
     <View style={styles.screen}>
-      <Button title="Post data!" color={Colors.darkOrange} onPress={dummyFunc} /> 
       <FlatList
         data={displayedSubRights}
         renderItem={renderSubright}
