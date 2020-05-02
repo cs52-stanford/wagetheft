@@ -45,7 +45,7 @@ const RightsScreen = (props) => {
   // const dummyFunc = () => {
   //   return async 
   //   // for any type of request to firebase
-  //   fetch('https://workers-rights.firebaseio.com/testing.json', { 
+  //   fetch('https://workers-rights-46c43.firebaseio.com/testing.json', { 
   //     method: 'POST',
   //     headers: {
   //       'Content-Type': 'application/json'
@@ -59,6 +59,7 @@ const RightsScreen = (props) => {
   // };
 
   async function dummyFunc() {
+
     fetch('https://workers-rights-46c43.firebaseio.com/testing.json', {
       method: 'POST',
       headers: {
@@ -66,8 +67,8 @@ const RightsScreen = (props) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        firstParam: 'yourValue',
-        secondParam: 'yourOtherValue',
+        firstParam: 'HELLO',
+        secondParam: 'BYE',
       }),
     });
   }
