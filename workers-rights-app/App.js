@@ -8,10 +8,14 @@ import { enableScreens } from 'react-native-screens';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+import * as firebase from 'firebase';
+import FirebaseConfig from './constants/ApiKeys';
+
 
 import eventsReducer from './store/reducers/events';
 import rightReducer from './store/reducers/rights';
 import rightsReducer from "./store/reducers/rights";
+import ApiKeys from "./constants/ApiKeys";
 
 enableScreens();
 
@@ -24,8 +28,6 @@ const fetchFonts = () => {
     "nunito-extrabold": require("./assets/fonts/Nunito-ExtraBold.ttf"),
   });
 };
-
-// create store with applyMiddleware as a second argument
 
 export default function App() {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -44,6 +46,10 @@ export default function App() {
     events: eventsReducer
   });
   const store = createStore(rootreducer, applyMiddleware(ReduxThunk));
+
+  // initialize firebase
+  // TODO: might need to add an if statement to check whether it has already loaded
+  firebase.initializeApp(ApiKeys.FirebaseConfig);
 
   return (
     <Host >
