@@ -34,10 +34,14 @@ const EventDetails = (props) => {
           </View>
         </View>
         <View style={styles.descriptionContainer}>
-          <Text style={{ ...styles.lightText, marginBottom: 10 }}>
-            Description:
-          </Text>
-          <Text style={styles.descriptionText}>{event.description}</Text>
+          {event.description.map(desc => (
+            <View>
+            <Text style={{ ...styles.lightText, marginVertical: 10 }}>
+              {desc.title}
+            </Text>
+            <Text style={styles.descriptionText}>{desc.data}</Text>
+            </View>
+           ))}
         </View>
       </ScrollView>
     </View>
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderBottomColor: "gray",
     borderBottomWidth: 1,
-    marginBottom: 15,
+    marginBottom: 5
   },
 
   lightText: {
